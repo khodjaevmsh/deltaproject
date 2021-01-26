@@ -1,0 +1,90 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="section">
+    <div class="container">
+        <h2 class="title is-1">Popular posts</h2>
+        <div class="columns">
+            {% for item in popular %}
+            <div class="column is-4">
+                <a href="{{item.get_absolute_url}}">
+                    <div class="card">
+                        <div class="card-image">
+                            <figure class="image is-4by3">
+                                <img src="{{item.image.url}}" alt="Placeholder image">
+                            </figure>
+                        </div>
+                        <div class="card-content">
+                            <div class="media">
+                                <div class="media-content">
+                                    <p class="title is-4">{{item.title}}</p>
+                                </div>
+                            </div>
+
+                            <div class="content">{{item.description}}<a>
+                                    <br>
+                                    <time datetime="2016-1-1">{{item.date|date:"D d M Y"}} {{
+                                        item.date|time:"H:i}}</time>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="columns is-centered">
+            <div class="column is-6">
+
+                <form action="{% url 'search_results' %}" method="GET" class="is-flex is-flex-direction-row">
+                    <input class="input" type="text" name="search" placeholder="Search...">
+                    <button class="button is-primary">Qidirish</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="columns">
+            {% for post in posts %}
+            <div class="column is-4">
+                <a href="{{post.get_absolute_url}}">
+                    <div class="card">
+                        <div class="card-image">
+                            <figure class="image is-4by3">
+                                <img src="{{post.image.url}}" alt="Placeholder image">
+                            </figure>
+                        </div>
+                        <div class="card-content">
+                            <div class="media">
+                                <div class="media-content">
+                                    <p class="title is-4">{{post.title}}</p>
+                                </div>
+                            </div>
+
+                            <div class="content">{{post.description}}<a>
+                                    <br>
+                                    <time datetime="2016-1-1">{{post.date|date:"D d M Y"}} {{
+                                        post.date|time:"H:i}}</time>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

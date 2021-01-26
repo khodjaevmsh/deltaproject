@@ -1,0 +1,34 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+<section class="section">
+    <div class="container">
+        <div class="columns">
+            {% for post in search_obj %}
+            <div class="column is-4">
+
+                <div class="card">
+                    <div class="card-image">
+                        <figure class="image is-4by3">
+                            <img src="{{post.image.url}}" alt="Placeholder image">
+                        </figure>
+                    </div>
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-content">
+                                <p class="title is-4">{{post.title}}</p>
+                            </div>
+                        </div>
+
+                        <div class="content">{{post.description}}<a>
+                                <br>
+                                <time datetime="2016-1-1">{{post.date|date:"D d M Y"}} {{ post.date|time:"H:i" }}</time>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

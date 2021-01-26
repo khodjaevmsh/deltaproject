@@ -1,0 +1,39 @@
+{% extends 'blog/base.html' %}
+
+
+{% block content %}
+
+<section class="section">
+    <div class="container">
+        <div class="columns">
+            <div class="column is-6">
+                <h1 class="title is-1">{{post.title}}</h1>
+                <img src="{{post.image.url}}" alt="">
+                <h4 class="subtitle is-4">{{post.description}}</h4>
+            </div>
+        </div>
+        <div class="columns">
+            <div class="column">
+                {% for comment in post.comments.all %}
+                <p class="subtitle is-3"><i>{{comment.author_name}}:</i>{{comment.comment_text}}</p>
+                {% endfor %}
+
+            </div>
+        </div>
+        <div class="columns">
+            <div class="column">
+                <form action="{% url 'leave_comment' post.slug %}" method="POST">
+                    {% csrf_token %}
+                    <input type="text" class="input" name="name" placeholder="Имя пользователя" />
+                    <textarea id="comment" class="textarea" name="comment_text" cols="10" rows="8" aria-required="true"
+                        placeholder="Оставьте комментарий"></textarea>
+                    <button type="submit">Оставить комментарий</button>
+                    <button type="reset">Отмена</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}

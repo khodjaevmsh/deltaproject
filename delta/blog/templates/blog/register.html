@@ -1,0 +1,40 @@
+{% extends 'blog/base.html' %}
+
+
+
+{% block content %}
+<form action="{% url 'login' %}" method="POST">
+    {% csrf_token %}
+    <span>{{form.first_name.label}}</span>
+    <span>{{form.first_name}}</span>
+
+    <span>{{form.last_name}}</span>
+
+    <label for="">{{form.username.label}}</label>
+    <span>{{form.username}}</span>
+    <span>{{form.email}}</span>
+
+    <span>{{form.password1}}</span>
+
+    <span>{{form.password2}}</span>
+    <button>Ro`yhatdan o`tish</button>
+    <button class="button is-primary"><a href="{% url 'home' %}">
+            Asosiy sahifa
+    </button></a>
+</form>
+
+{% if form.errors %}
+{% for field in form %}
+{% for error in field.errors %}
+<div class="alert alert-danger">
+    <strong>{{ error }}</strong>
+</div>
+{% endfor %}
+{% endfor %}
+{% for error in form.non_field_errors %}
+<div class="alert alert-danger">
+    <strong>{{ error }}</strong>
+</div>
+{% endfor %}
+{% endif %}
+{% endblock %}
